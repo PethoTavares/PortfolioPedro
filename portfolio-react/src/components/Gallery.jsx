@@ -205,16 +205,21 @@ export default function Gallery() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="scroll-mt-[80px]"
             >
-              <motion.h2
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`text-[clamp(1.5rem,3.5vw,2.25rem)] font-medium tracking-[-0.02em] ${titleColor} mb-8 md:mb-10 text-center transition-colors duration-500`}
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-              >
-                {section.label[language]}
-              </motion.h2>
+              <div className="mb-8 md:mb-10">
+                <AnimatePresence mode="wait">
+                  <motion.h2
+                    key={`${section.id}-${language}`}
+                    initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className={`text-[clamp(1.5rem,3.5vw,2.25rem)] font-medium tracking-[-0.02em] ${titleColor} text-center transition-colors duration-500`}
+                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                  >
+                    {section.label[language]}
+                  </motion.h2>
+                </AnimatePresence>
+              </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-5">
                 {section.images.map((src, i) => (

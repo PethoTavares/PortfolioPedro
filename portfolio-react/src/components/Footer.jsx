@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -32,7 +33,18 @@ export default function Footer() {
               href="mailto:contato@pedrogiacomini.com"
               className={`text-[12px] ${textColor} ${hoverColor} transition-colors duration-300`}
             >
-              {text.email}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={language}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                  className="block"
+                >
+                  {text.email}
+                </motion.span>
+              </AnimatePresence>
             </a>
             <a
               href="https://www.linkedin.com/in/pedrogiacomini"

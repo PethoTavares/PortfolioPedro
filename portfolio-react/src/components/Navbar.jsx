@@ -81,16 +81,27 @@ export default function Navbar() {
       <div className="max-w-[1100px] mx-auto px-4 md:px-8">
         <div className="relative flex h-[60px] items-center justify-center gap-4">
           <div className="hidden md:flex items-center gap-7">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNav(e, item.href)}
-                className={`text-[12px] ${textColor} ${textHover} transition-colors duration-300 tracking-[0.06em] uppercase font-medium`}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={language}
+                initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
+                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, y: -8, filter: 'blur(6px)' }}
+                transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-center gap-7"
               >
-                {item.label}
-              </a>
-            ))}
+                {navItems.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => handleNav(e, item.href)}
+                    className={`text-[12px] ${textColor} ${textHover} transition-colors duration-300 tracking-[0.06em] uppercase font-medium`}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
 
           <div className={`hidden md:block w-[3px] h-[3px] rounded-full ${isDark ? 'bg-white/15' : 'bg-black/15'}`} />
@@ -137,7 +148,18 @@ export default function Navbar() {
               className={`rounded-full border px-3 py-2 text-[10px] uppercase tracking-[0.12em] ${langBtnClass} ${borderColor} transition-all duration-300 cursor-pointer`}
               aria-label={labels.language}
             >
-              {language === 'pt-BR' ? 'PT/BR' : 'ENG'}
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={language}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                  className="block"
+                >
+                  {language === 'pt-BR' ? 'PT/BR' : 'ENG'}
+                </motion.span>
+              </AnimatePresence>
             </button>
 
             <button
@@ -162,14 +184,20 @@ export default function Navbar() {
           >
             <div className="px-4 py-5 flex flex-col gap-4 text-center">
               {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  onClick={(e) => handleNav(e, item.href)}
-                  className={`text-[13px] ${textColor} ${textHover} transition-colors uppercase tracking-[0.06em] font-medium`}
-                >
-                  {item.label}
-                </a>
+                <AnimatePresence mode="wait" key={`${language}-${item.href}`}>
+                  <motion.a
+                    key={`${language}-${item.href}`}
+                    href={item.href}
+                    onClick={(e) => handleNav(e, item.href)}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+                    className={`text-[13px] ${textColor} ${textHover} transition-colors uppercase tracking-[0.06em] font-medium`}
+                  >
+                    {item.label}
+                  </motion.a>
+                </AnimatePresence>
               ))}
 
               <button

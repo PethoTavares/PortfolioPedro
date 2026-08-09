@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -36,15 +36,21 @@ export default function Hero() {
           Pedro Tavares
         </motion.h1>
 
-        <motion.p
-          initial={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          transition={{ duration: 1.2, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-          className={`relative z-10 text-[clamp(0.85rem,1.6vw,1.05rem)] ${subtitleColor} font-light tracking-[0.08em] uppercase transition-colors duration-500`}
-        >
-          {text.roleA} <span className={isDark ? 'text-[#333]' : 'text-[#ccc]'}>/</span> {text.roleB}{' '}
-          <span className={isDark ? 'text-[#333]' : 'text-[#ccc]'}>/</span> {text.roleC}
-        </motion.p>
+        <div className="relative z-10 min-h-[1.75rem]">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={language}
+              initial={{ opacity: 0, y: 10, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: -10, filter: 'blur(8px)' }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              className={`relative z-10 text-[clamp(0.85rem,1.6vw,1.05rem)] ${subtitleColor} font-light tracking-[0.08em] uppercase transition-colors duration-500`}
+            >
+              {text.roleA} <span className={isDark ? 'text-[#333]' : 'text-[#ccc]'}>/</span> {text.roleB}{' '}
+              <span className={isDark ? 'text-[#333]' : 'text-[#ccc]'}>/</span> {text.roleC}
+            </motion.p>
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   )
