@@ -1,12 +1,44 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
+import { useLanguage } from '../context/LanguageContext'
 
-/* ── Images organized by category (Campanhas last) ── */
-const sections = [
+const sectionData = [
+  {
+    id: 'portfolio',
+    label: { 'pt-BR': 'Portfolio', en: 'Portfolio' },
+    images: [
+      '/assets/Portfolio/AulaoJuninoFlex.png',
+      '/assets/Portfolio/FlexKidsFerias - Post.png',
+      '/assets/Portfolio/FlexKidsFerias - Stories.png',
+      '/assets/Portfolio/FlexKidsFeriasEmMovimento.png',
+      '/assets/Portfolio/Flex_NovaTurmaYoga_POST.png',
+      '/assets/Portfolio/Flex_NovaTurmaYoga_STORY.png',
+      '/assets/Portfolio/Flex_Email Post.png',
+      '/assets/Portfolio/Flex_Email Stories.png',
+      '/assets/Portfolio/Flex_Whatsapp Post.png',
+      '/assets/Portfolio/Flex_Whatsapp Stories.png',
+      '/assets/Portfolio/Flex Aulao Junino Stories.png',
+      '/assets/Portfolio/Flex Email TV.png',
+      '/assets/Portfolio/Flex Whatsapp TV.png',
+      '/assets/Portfolio/Flex_TV_NovaTurmaYogaTV.png',
+      '/assets/Portfolio/Mockup Camiseta Flex.png',
+      '/assets/Portfolio/MockupWindBanner.png',
+      '/assets/Portfolio/TendaFLEX Azul.png',
+      '/assets/Portfolio/TendaFLEX Vermelha.png',
+      '/assets/Portfolio/BannerWhatsapp.jpg',
+      '/assets/Portfolio/BannerWhatsExemplo.png',
+      '/assets/Portfolio/ExemploAdesivo.png',
+      '/assets/Portfolio/ExemploBanner.png',
+      '/assets/Portfolio/ExemploMedalha.png',
+      '/assets/Portfolio/ExemploTenda Azul.png',
+      '/assets/Portfolio/ExemploTenda Vermelha.png',
+      '/assets/Portfolio/ExemploVoucher.png',
+    ],
+  },
   {
     id: 'social-media',
-    label: 'Social Media',
+    label: { 'pt-BR': 'Social Media', en: 'Social Media' },
     images: [
       '/assets/social-media/01. Post - Bradesco - Campanhas Always On.jpg',
       '/assets/social-media/Post---Sicoob---21.01.jpg',
@@ -36,7 +68,7 @@ const sections = [
   },
   {
     id: 'conteudo',
-    label: 'Conteúdo',
+    label: { 'pt-BR': 'Conteudo', en: 'Content' },
     images: [
       '/assets/carrossel/Rota-Do-Iniciante_Carrossel---Vip_01.jpg',
       '/assets/carrossel/Rota-Do-Iniciante_Carrossel---Vip_02.jpg',
@@ -48,7 +80,7 @@ const sections = [
   },
   {
     id: 'banners',
-    label: 'Banners',
+    label: { 'pt-BR': 'Banners', en: 'Banners' },
     images: [
       '/assets/banners/VIP_Correios_Banner Site_Mais Barato copiar.jpg',
       '/assets/banners/02. BANNER_SITE - SICOOB - 30 e 31.03.26.webp',
@@ -60,7 +92,7 @@ const sections = [
   },
   {
     id: 'campanhas',
-    label: 'Campanhas',
+    label: { 'pt-BR': 'Campanhas', en: 'Campaigns' },
     images: [
       '/assets/campanhas/KV - Campanha SP - Cadastro MASP.jpg',
       '/assets/campanhas/KV - Campanha SP - Visite o pátio.jpg',
@@ -70,9 +102,8 @@ const sections = [
   },
 ]
 
-const allImages = sections.flatMap((s) => s.images)
+const allImages = sectionData.flatMap((section) => section.images)
 
-/* ── Lightbox ── */
 function Lightbox({ index, onClose, onPrev, onNext }) {
   const src = allImages[index]
   const { theme } = useTheme()
@@ -117,19 +148,19 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
         />
       </AnimatePresence>
 
-      <button onClick={onClose} className={`absolute top-5 right-5 w-10 h-10 flex items-center justify-center rounded-full ${btnClass} transition-all duration-300 cursor-pointer`}>
+      <button onClick={onClose} className={`absolute top-5 right-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-full ${btnClass} transition-all duration-300`}>
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none">
           <path d="M2 2L14 14M14 2L2 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       </button>
 
-      <button onClick={(e) => { e.stopPropagation(); onPrev() }} className={`absolute left-4 md:left-8 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full ${btnClass} transition-all duration-300 cursor-pointer`}>
+      <button onClick={(e) => { e.stopPropagation(); onPrev() }} className={`absolute left-4 top-1/2 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full md:left-8 ${btnClass} transition-all duration-300`}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
           <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
 
-      <button onClick={(e) => { e.stopPropagation(); onNext() }} className={`absolute right-4 md:right-8 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full ${btnClass} transition-all duration-300 cursor-pointer`}>
+      <button onClick={(e) => { e.stopPropagation(); onNext() }} className={`absolute right-4 top-1/2 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full md:right-8 ${btnClass} transition-all duration-300`}>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
           <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -142,9 +173,9 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
   )
 }
 
-/* ── Main Gallery ── */
 export default function Gallery() {
   const { theme } = useTheme()
+  const { language } = useLanguage()
   const isDark = theme === 'dark'
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
@@ -168,7 +199,7 @@ export default function Gallery() {
     <>
       <section className="pb-[80px] md:pb-[120px]">
         <div className="max-w-[1100px] mx-auto px-4 md:px-8 space-y-[80px] md:space-y-[110px]">
-          {sections.map((section) => (
+          {sectionData.map((section) => (
             <motion.div
               key={section.id}
               id={section.id}
@@ -178,7 +209,6 @@ export default function Gallery() {
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
               className="scroll-mt-[80px]"
             >
-              {/* Section title — centered, slide up */}
               <motion.h2
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -187,10 +217,9 @@ export default function Gallery() {
                 className={`text-[clamp(1.5rem,3.5vw,2.25rem)] font-medium tracking-[-0.02em] ${titleColor} mb-8 md:mb-10 text-center transition-colors duration-500`}
                 style={{ fontFamily: "'Space Grotesk', sans-serif" }}
               >
-                {section.label}
+                {section.label[language]}
               </motion.h2>
 
-              {/* Grid — slide up per item */}
               <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-5">
                 {section.images.map((src, i) => (
                   <motion.div

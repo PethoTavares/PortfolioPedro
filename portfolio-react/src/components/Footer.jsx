@@ -1,8 +1,20 @@
 import { useTheme } from '../context/ThemeContext'
+import { useLanguage } from '../context/LanguageContext'
+
+const copy = {
+  'pt-BR': {
+    email: 'Email',
+  },
+  en: {
+    email: 'Email',
+  },
+}
 
 export default function Footer() {
   const { theme } = useTheme()
+  const { language } = useLanguage()
   const isDark = theme === 'dark'
+  const text = copy[language]
 
   const textColor = isDark ? 'text-white/60' : 'text-[#1a1a1a]/60'
   const hoverColor = isDark ? 'hover:text-white' : 'hover:text-[#1a1a1a]'
@@ -20,7 +32,7 @@ export default function Footer() {
               href="mailto:contato@pedrogiacomini.com"
               className={`text-[12px] ${textColor} ${hoverColor} transition-colors duration-300`}
             >
-              Email
+              {text.email}
             </a>
             <a
               href="https://www.linkedin.com/in/pedrogiacomini"
