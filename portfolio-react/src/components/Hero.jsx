@@ -25,7 +25,7 @@ export default function Hero() {
 
   return (
     <section className="relative pt-[60px] pb-[40px] md:pt-[80px] md:pb-[60px]">
-      <div className="relative w-full px-4 text-center min-h-[85vh] md:min-h-[90vh] flex flex-col items-center justify-center overflow-hidden">
+      <div className="relative w-full px-4 text-center min-h-[72vh] md:min-h-[76.5vh] flex flex-col items-center justify-center overflow-hidden">
         <motion.h1
           initial={{ opacity: 0, scale: 1.15, filter: 'blur(18px)' }}
           animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}

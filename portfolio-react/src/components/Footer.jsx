@@ -30,7 +30,7 @@ export default function Footer() {
           </p>
           <div className="flex items-center gap-6">
             <a
-              href="mailto:contato@pedrogiacomini.com"
+              href="mailto:petholite.tavares@gmal.com"
               className={`text-[12px] ${textColor} ${hoverColor} transition-colors duration-300`}
             >
               <AnimatePresence mode="wait">
