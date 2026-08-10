@@ -5,7 +5,7 @@ import { useLanguage } from '../context/LanguageContext'
 
 const navLabels = {
   'pt-BR': {
-    portfolio: 'Portfolio',
+    portfolio: 'Flex Academia',
     social: 'Social Media',
     content: 'Conteudo',
     banners: 'Banners',
@@ -13,7 +13,7 @@ const navLabels = {
     language: 'Idioma',
   },
   en: {
-    portfolio: 'Portfolio',
+    portfolio: 'Flex Gym',
     social: 'Social Media',
     content: 'Content',
     banners: 'Banners',
