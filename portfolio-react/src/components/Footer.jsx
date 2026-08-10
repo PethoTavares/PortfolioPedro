@@ -23,14 +23,14 @@ export default function Footer() {
 
   return (
     <footer className={`border-t ${borderColor} transition-colors duration-500`}>
-      <div className="max-w-[1100px] mx-auto px-6 md:px-8 py-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="mx-auto max-w-[1100px] px-6 py-6 md:px-8">
+        <div className="flex flex-col items-center justify-between gap-3 md:flex-row">
           <p className={`text-[12px] ${textColor} font-light transition-colors duration-500`}>
-            © 2026 Pedro Tavares
+            {'\u00A9'} 2026 Pedro Tavares
           </p>
           <div className="flex items-center gap-6">
             <a
-              href="mailto:petholite.tavares@gmal.com"
+              href="mailto:petholite.tavares@gmail.com"
               className={`text-[12px] ${textColor} ${hoverColor} transition-colors duration-300`}
             >
               <AnimatePresence mode="wait">

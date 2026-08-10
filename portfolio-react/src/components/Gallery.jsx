@@ -12,31 +12,31 @@ const sectionData = [
       '/assets/social-media/Post---Sicoob---21.01.jpg',
       '/assets/social-media/Post - BV Placas Solares - 29.01.2025.jpg',
       '/assets/social-media/Post-IG-BV-13.03.25.jpg',
-      '/assets/social-media/Post-FB_Leilão_Camaro_14.03.jpg',
-      '/assets/social-media/01.-Post-IG-Leilão-Premium-18.03.jpg',
-      '/assets/social-media/01.-Post-IG-Leilão-de-Pesados-21.03.jpg',
+      '/assets/social-media/Post-FB_LeilÃ£o_Camaro_14.03.jpg',
+      '/assets/social-media/01.-Post-IG-LeilÃ£o-Premium-18.03.jpg',
+      '/assets/social-media/01.-Post-IG-LeilÃ£o-de-Pesados-21.03.jpg',
       '/assets/social-media/Post Meta - TJSP - Fazenda - 30.04.26.jpg',
-      '/assets/social-media/META - Post IG BRA_Leilão 07.04.26.jpg',
-      '/assets/social-media/Capa-Carrossel---Leilão-de-Oportunidades-20.03.jpg',
-      '/assets/social-media/Capa Post-IG-Leilão-Veículos-de-Trânsito-31.03.jpg',
-      '/assets/social-media/Post 1350px KV1 - Campanha Quero Vender_Março 26.jpg',
+      '/assets/social-media/META - Post IG BRA_LeilÃ£o 07.04.26.jpg',
+      '/assets/social-media/Capa-Carrossel---LeilÃ£o-de-Oportunidades-20.03.jpg',
+      '/assets/social-media/Capa Post-IG-LeilÃ£o-VeÃ­culos-de-TrÃ¢nsito-31.03.jpg',
+      '/assets/social-media/Post 1350px KV1 - Campanha Quero Vender_MarÃ§o 26.jpg',
       '/assets/social-media/VIP_OlhoNoLance_PostFeed_1080x1080.png',
-      '/assets/social-media/01.-Post-IG-Leilão-Financiamento_23.05.jpg',
-      '/assets/social-media/Post Leilão Sabadão 31.05.jpg',
-      '/assets/social-media/Post  IG Leilão Especial Motos 06.06.2025.jpg',
-      '/assets/social-media/Post-IG---Leilão-Premium-TJPI-29.05.jpg',
+      '/assets/social-media/01.-Post-IG-LeilÃ£o-Financiamento_23.05.jpg',
+      '/assets/social-media/Post LeilÃ£o SabadÃ£o 31.05.jpg',
+      '/assets/social-media/Post  IG LeilÃ£o Especial Motos 06.06.2025.jpg',
+      '/assets/social-media/Post-IG---LeilÃ£o-Premium-TJPI-29.05.jpg',
       '/assets/social-media/CONSORCIO - POST 1200 X 1200 - 10.04@1x_1.jpg',
       '/assets/social-media/Post IG - Santander 10.06.25.jpg',
-      '/assets/social-media/01.-Post-FB---Ação-Recompra.jpg',
+      '/assets/social-media/01.-Post-FB---AÃ§Ã£o-Recompra.jpg',
       '/assets/social-media/01.Post-IG---BV-27.03.25.jpg',
-      '/assets/social-media/Post - LEILÃO - SMDT - 180326.jpg',
-      '/assets/social-media/Post - Leilão Pesados 11.65.2025.jpg',
-      '/assets/social-media/01. Post IG Leilão Veículos Detran MA_13.06.2025.png',
+      '/assets/social-media/Post - LEILÃƒO - SMDT - 180326.jpg',
+      '/assets/social-media/Post - LeilÃ£o Pesados 11.65.2025.jpg',
+      '/assets/social-media/01. Post IG LeilÃ£o VeÃ­culos Detran MA_13.06.2025.png',
     ],
   },
   {
     id: 'conteudo',
-    label: { 'pt-BR': 'Conteúdo', en: 'Content' },
+    label: { 'pt-BR': 'Conte\u00FAdo', en: 'Content' },
     images: [
       '/assets/carrossel/Rota-Do-Iniciante_Carrossel---Vip_01.jpg',
       '/assets/carrossel/Rota-Do-Iniciante_Carrossel---Vip_02.jpg',
@@ -52,7 +52,7 @@ const sectionData = [
     images: [
       '/assets/banners/VIP_Correios_Banner Site_Mais Barato copiar.jpg',
       '/assets/banners/02. BANNER_SITE - SICOOB - 30 e 31.03.26.webp',
-      '/assets/banners/BANNER_SITE - Fast Consórsio 10.04.webp',
+      '/assets/banners/BANNER_SITE - Fast ConsÃ³rsio 10.04.webp',
       '/assets/banners/Banner Site - BV Placa Solares 30.04.25.webp',
       '/assets/banners/Banner Site - SICOOB 07 e 09.04.25 copy.webp',
       '/assets/banners/BANNER_SITE - BRA 08 e 12.05.webp',
@@ -63,7 +63,7 @@ const sectionData = [
     label: { 'pt-BR': 'Campanhas', en: 'Campaigns' },
     images: [
       '/assets/campanhas/KV - Campanha SP - Cadastro MASP.jpg',
-      '/assets/campanhas/KV - Campanha SP - Visite o pátio.jpg',
+      '/assets/campanhas/KV - Campanha SP - Visite o pÃ¡tio.jpg',
       '/assets/campanhas/AON Lote a Lote - Alto investimento - SP.jpg',
       '/assets/campanhas/Carrossel - Recorrentes.jpg',
     ],
@@ -99,10 +99,18 @@ const sectionData = [
 
 const allImages = sectionData.flatMap((section) => section.images)
 
+function getImageAlt(sectionLabel, index) {
+  return `${sectionLabel} ${index + 1}`
+}
+
 function Lightbox({ index, onClose, onPrev, onNext }) {
   const src = allImages[index]
   const { theme } = useTheme()
+  const { language } = useLanguage()
   const isDark = theme === 'dark'
+  const activeSection = sectionData.find((section) => section.images.includes(src))
+  const imageIndex = activeSection ? activeSection.images.indexOf(src) : index
+  const altText = activeSection ? getImageAlt(activeSection.label[language], imageIndex) : `Portfolio ${index + 1}`
 
   useEffect(() => {
     const handleKey = (e) => {
@@ -133,13 +141,13 @@ function Lightbox({ index, onClose, onPrev, onNext }) {
         <motion.img
           key={src}
           src={src}
-          alt=""
+          alt={altText}
           onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.94, filter: 'blur(4px)' }}
           animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
           exit={{ opacity: 0, scale: 0.94, filter: 'blur(4px)' }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-full max-h-[88vh] object-contain rounded-[4px] cursor-default"
+          className="max-w-full max-h-[88vh] cursor-default rounded-[4px] object-contain"
         />
       </AnimatePresence>
 
@@ -193,7 +201,7 @@ export default function Gallery() {
   return (
     <>
       <section className="pb-[80px] md:pb-[120px]">
-        <div className="max-w-[1100px] mx-auto px-4 md:px-8 space-y-[80px] md:space-y-[110px]">
+        <div className="mx-auto max-w-[1100px] space-y-[80px] px-4 md:space-y-[110px] md:px-8">
           {sectionData.map((section) => (
             <motion.div
               key={section.id}
@@ -212,7 +220,7 @@ export default function Gallery() {
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                     exit={{ opacity: 0, y: -20, filter: 'blur(8px)' }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className={`text-[clamp(1.5rem,3.5vw,2.25rem)] font-medium tracking-[-0.02em] ${titleColor} text-center transition-colors duration-500`}
+                    className={`text-[clamp(1.5rem,3.5vw,2.25rem)] ${titleColor} text-center font-medium tracking-[-0.02em] transition-colors duration-500`}
                     style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                   >
                     {section.label[language]}
@@ -220,7 +228,7 @@ export default function Gallery() {
                 </AnimatePresence>
               </div>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-3.5 md:gap-5">
+              <div className="grid grid-cols-2 gap-3.5 md:grid-cols-3 md:gap-5">
                 {section.images.map((src, i) => (
                   <motion.div
                     key={src}
@@ -233,14 +241,14 @@ export default function Gallery() {
                       ease: [0.16, 1, 0.3, 1],
                     }}
                     onClick={() => openLightbox(src)}
-                    className={`group overflow-hidden rounded-[4px] ${cardBg} cursor-zoom-in transition-colors duration-500`}
+                    className={`group cursor-zoom-in overflow-hidden rounded-[4px] ${cardBg} transition-colors duration-500`}
                     style={{ aspectRatio: '1 / 1' }}
                   >
                     <img
                       src={src}
-                      alt=""
+                      alt={getImageAlt(section.label[language], i)}
                       loading="lazy"
-                      className="w-full h-full object-cover transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05] group-hover:brightness-110"
+                      className="h-full w-full object-cover transition-all duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.05] group-hover:brightness-110"
                     />
                   </motion.div>
                 ))}

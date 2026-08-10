@@ -7,7 +7,7 @@ const navLabels = {
   'pt-BR': {
     portfolio: 'Flex Academia',
     social: 'Social Media',
-    content: 'Conteúdo',
+    content: 'Conte\u00FAdo',
     banners: 'Banners',
     campaigns: 'Campanhas',
     language: 'Idioma',
@@ -104,12 +104,12 @@ export default function Navbar() {
             </AnimatePresence>
           </div>
 
-          <div className={`hidden md:block w-[3px] h-[3px] rounded-full ${isDark ? 'bg-white/15' : 'bg-black/15'}`} />
+          <div className={`hidden md:block h-[3px] w-[3px] rounded-full ${isDark ? 'bg-white/15' : 'bg-black/15'}`} />
 
           <div className="hidden md:flex items-center gap-2">
             <button
               onClick={toggleLanguage}
-              className={`flex items-center gap-2 rounded-full border px-3 py-2 text-[11px] uppercase tracking-[0.12em] ${langBtnClass} ${borderColor} transition-all duration-300 cursor-pointer`}
+              className={`flex cursor-pointer items-center gap-2 rounded-full border px-3 py-2 text-[11px] uppercase tracking-[0.12em] ${langBtnClass} ${borderColor} transition-all duration-300`}
               aria-label={labels.language}
             >
               <span className={language === 'pt-BR' ? 'text-current' : 'opacity-45'}>PT/BR</span>
@@ -119,7 +119,7 @@ export default function Navbar() {
 
             <button
               onClick={toggle}
-              className={`w-8 h-8 flex items-center justify-center rounded-full ${toggleBg} transition-all duration-300 cursor-pointer`}
+              className={`flex h-8 w-8 cursor-pointer items-center justify-center rounded-full ${toggleBg} transition-all duration-300`}
               aria-label="Toggle theme"
             >
               {isDark ? (
@@ -142,10 +142,10 @@ export default function Navbar() {
             </button>
           </div>
 
-          <div className="md:hidden absolute right-4 flex items-center gap-2">
+          <div className="absolute right-4 flex items-center gap-2 md:hidden">
             <button
               onClick={toggleLanguage}
-              className={`rounded-full border px-3 py-2 text-[10px] uppercase tracking-[0.12em] ${langBtnClass} ${borderColor} transition-all duration-300 cursor-pointer`}
+              className={`cursor-pointer rounded-full border px-3 py-2 text-[10px] uppercase tracking-[0.12em] ${langBtnClass} ${borderColor} transition-all duration-300`}
               aria-label={labels.language}
             >
               <AnimatePresence mode="wait">
@@ -164,10 +164,11 @@ export default function Navbar() {
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex flex-col gap-[5px] p-1 cursor-pointer"
+              className="flex cursor-pointer flex-col gap-[5px] p-1"
+              aria-label="Open menu"
             >
-              <span className={`w-5 h-[1.5px] ${hamburgerColor} transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[3.25px]' : ''}`} />
-              <span className={`w-5 h-[1.5px] ${hamburgerColor} transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[3.25px]' : ''}`} />
+              <span className={`h-[1.5px] w-5 ${hamburgerColor} transition-all duration-300 ${menuOpen ? 'translate-y-[3.25px] rotate-45' : ''}`} />
+              <span className={`h-[1.5px] w-5 ${hamburgerColor} transition-all duration-300 ${menuOpen ? '-translate-y-[3.25px] -rotate-45' : ''}`} />
             </button>
           </div>
         </div>
@@ -180,9 +181,9 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className={`md:hidden ${isDark ? 'bg-[#0a0a0a]/95' : 'bg-[#f5f5f0]/95'} backdrop-blur-xl border-b ${isDark ? 'border-white/5' : 'border-black/5'}`}
+            className={`md:hidden ${isDark ? 'bg-[#0a0a0a]/95' : 'bg-[#f5f5f0]/95'} border-b backdrop-blur-xl ${isDark ? 'border-white/5' : 'border-black/5'}`}
           >
-            <div className="px-4 py-5 flex flex-col gap-4 text-center">
+            <div className="flex flex-col gap-4 px-4 py-5 text-center">
               {navItems.map((item) => (
                 <AnimatePresence mode="wait" key={`${language}-${item.href}`}>
                   <motion.a
@@ -193,7 +194,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -6 }}
                     transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-                    className={`text-[13px] ${textColor} ${textHover} transition-colors uppercase tracking-[0.06em] font-medium`}
+                    className={`text-[13px] ${textColor} ${textHover} uppercase tracking-[0.06em] transition-colors font-medium`}
                   >
                     {item.label}
                   </motion.a>
@@ -202,7 +203,7 @@ export default function Navbar() {
 
               <button
                 onClick={toggle}
-                className={`mx-auto mt-2 w-8 h-8 flex items-center justify-center rounded-full ${toggleBg} transition-all duration-300 cursor-pointer`}
+                className={`mx-auto mt-2 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full ${toggleBg} transition-all duration-300`}
                 aria-label="Toggle theme"
               >
                 {isDark ? (
