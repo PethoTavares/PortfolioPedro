@@ -36,7 +36,7 @@ const sectionData = [
   },
   {
     id: 'conteudo',
-    label: { 'pt-BR': 'Conteudo', en: 'Content' },
+    label: { 'pt-BR': 'Conteúdo', en: 'Content' },
     images: [
       '/assets/carrossel/Rota-Do-Iniciante_Carrossel---Vip_01.jpg',
       '/assets/carrossel/Rota-Do-Iniciante_Carrossel---Vip_02.jpg',

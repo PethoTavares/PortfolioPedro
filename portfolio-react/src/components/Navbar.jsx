@@ -7,7 +7,7 @@ const navLabels = {
   'pt-BR': {
     portfolio: 'Flex Academia',
     social: 'Social Media',
-    content: 'Conteudo',
+    content: 'Conteúdo',
     banners: 'Banners',
     campaigns: 'Campanhas',
     language: 'Idioma',
@@ -31,11 +31,11 @@ export default function Navbar() {
   const labels = navLabels[language]
 
   const navItems = [
-    { label: labels.portfolio, href: '#portfolio' },
     { label: labels.social, href: '#social-media' },
     { label: labels.content, href: '#conteudo' },
     { label: labels.banners, href: '#banners' },
     { label: labels.campaigns, href: '#campanhas' },
+    { label: labels.portfolio, href: '#portfolio' },
   ]
 
   useEffect(() => {

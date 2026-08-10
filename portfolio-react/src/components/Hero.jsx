@@ -4,7 +4,7 @@ import { useLanguage } from '../context/LanguageContext'
 
 const copy = {
   'pt-BR': {
-    roleA: 'Designer Grafico',
+    roleA: 'Designer Gráfico',
     roleB: 'Frontend Developer',
     roleC: 'UI/UX',
   },
